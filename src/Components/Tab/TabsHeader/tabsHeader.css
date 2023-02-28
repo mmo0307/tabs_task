@@ -1,0 +1,24 @@
+.tabs-header{
+  display: flex;
+  gap: 100px;
+  padding: 20px;
+  align-items: center;
+}
+
+.tabs-label{
+  font-weight: normal;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.tabs-label:hover{
+  cursor: pointer;
+}
+
+.tabs-label-active{
+  font-weight: bold;
+  background: #4a4a4a;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+}

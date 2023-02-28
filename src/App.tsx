@@ -1,26 +1,65 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import "./App.css";
+import {Tabs, TabsBody, TabsHeader, TabsIfActive} from "./Components/Tab";
 
-function App() {
+const Tab1 = () => {
+  return <>Tab - 1 Content</>;
+};
+const Tab2 = () => {
+  return <>Tab - 2 Content</>;
+};
+const Tab3 = () => {
+    return <>Tab - 3 Content</>;
+};
+
+export default function App() {
+  const tabs = [
+    {
+      label: "Tab 1",
+      key: "tab-1",
+      component: <Tab1 />,
+    },
+    {
+      label: "Tab 2",
+      key: "tab-2",
+      component: <Tab2 />,
+    },
+      {
+          label: "Tab 3",
+          key: "tab-3",
+          component: <Tab3 />,
+      }
+  ];
+  const [activeTab, setActiveTab] = useState(tabs[0].key);
+  const onTabClick = (tabKey:string) => {
+    setActiveTab(tabKey);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="wrapper">
+        <Tabs
+            tabs={tabs}
+            activeTab={activeTab}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+            <TabsHeader
+                tabs={tabs}
+                activeTabKey={activeTab}
+                onTabClick={onTabClick}
+            />
+          <div className="tabs-content-body">
+            <TabsBody>
+              {tabs.map(({ key, label, component }) => (
+                <TabsIfActive
+                    key={key}
+                    tabKey={key}
+                    isActive={activeTab === key}
+                >
+                  {component}
+                </TabsIfActive>
+            ))}
+            </TabsBody>
+          </div>
+        </Tabs>
+      </div>
   );
 }
-
-export default App;
